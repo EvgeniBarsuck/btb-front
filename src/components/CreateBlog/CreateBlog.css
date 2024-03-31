@@ -1,0 +1,10 @@
+.create-blog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-blog div {
+    margin-bottom: 10px;
+}
