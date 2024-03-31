@@ -14,10 +14,18 @@ export const CreateBlog = () => {
           name: "",
         }}
         validate={(values) => {
-          const errors: { name?: string } = {};
+          const errors: { name?: string, longDescription?: string, shortDescription?: string } = {};
 
           if (!values.name) {
             errors.name = "Required";
+          }
+
+          if (!values.longDescription) {
+            errors.longDescription = "Required";
+          }
+
+          if (!values.shortDescription) {
+            errors.longDescription = "Required";
           }
 
           return errors;

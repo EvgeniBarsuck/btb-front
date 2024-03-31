@@ -23,4 +23,14 @@
     width: 100%;
 }
 
+.comment-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;   
+    align-items: end; 
+
+    width: 100%;
+
+}
+
 

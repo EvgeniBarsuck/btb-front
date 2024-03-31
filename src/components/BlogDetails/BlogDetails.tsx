@@ -14,7 +14,6 @@ export const BlogDetails = () => {
     getBlog(data).then((data) => SetBlog(data));
   }, [data]);
 
-  console.log("🚀 ~ PostsList ~ blog:", blog?.props.posts);
   return (
     <div className="blog-content">
       <Typography variant="h5" gutterBottom>

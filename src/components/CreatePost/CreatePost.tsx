@@ -24,10 +24,22 @@ export const CreatePost = (props: { userBlogs: Blog[] }) => {
           blog: null,
         }}
         validate={(values) => {
-          const errors: { name?: string } = {};
+          const errors: {
+            name?: string;
+            content?: string;
+            shortDescription?: string;
+          } = {};
 
           if (!values.name) {
             errors.name = "Required";
+          }
+
+          if (!values.content) {
+            errors.content = "Required";
+          }
+
+          if (!values.shortDescription) {
+            errors.shortDescription = "Required";
           }
 
           return errors;
@@ -35,14 +47,17 @@ export const CreatePost = (props: { userBlogs: Blog[] }) => {
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
 
-          const cookie = new Cookies()
+          const cookie = new Cookies();
 
-          await createPost({
-            content: values.content,
-            blogId: values.blog,
-            name: values.name,
-            shortDescription: values.shortDescription,
-          }, cookie.get('accessToken'));
+          await createPost(
+            {
+              content: values.content,
+              blogId: values.blog,
+              name: values.name,
+              shortDescription: values.shortDescription,
+            },
+            cookie.get("accessToken")
+          );
 
           setSubmitting(false);
         }}
