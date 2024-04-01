@@ -11,10 +11,10 @@ import "./CreatePost.css";
 import { Formik } from "formik";
 
 import { Blog } from "../../api/get-user-blogs";
-import { customValidate } from "../../helpers/validate";
-import { useSubmit } from "./hooks/UseSubmit";
+import { UseCreatePostSubmitForm } from "./hooks/UseSubmit";
 
 export const CreatePost = (props: { userBlogs: Blog[] }) => {
+  const { customValidate, submitForm } = UseCreatePostSubmitForm();
   return (
     <div>
       <Formik
@@ -25,7 +25,9 @@ export const CreatePost = (props: { userBlogs: Blog[] }) => {
           blog: null,
         }}
         validate={customValidate}
-        onSubmit={useSubmit}
+        onSubmit={(values, { setSubmitting }) =>
+          submitForm(values, setSubmitting)
+        }
       >
         {({
           values,

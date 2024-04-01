@@ -1,14 +1,9 @@
-import {
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  Button,
-} from "@mui/material";
+import { Typography, List } from "@mui/material";
 import Cookies from "universal-cookie";
 import { useState } from "react";
 
 import { Comment } from "../../api/get-comments";
+import { Comment as CommentComponent } from "../Comment/Comment";
 import { deleteComment } from "../../api/delete-comment";
 
 export const CommentsList = (props: { comments: Comment[] }) => {
@@ -34,22 +29,14 @@ export const CommentsList = (props: { comments: Comment[] }) => {
     <>
       <Typography variant="overline">Comments</Typography>
       <List>
-        {props.comments.length > 0
+        {!!props.comments.length
           ? props.comments.map((comment) => (
-              <ListItem
-                sx={{
-                  width: "500px",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <ListItemText primary={comment.props.message} />
-                <Button onClick={() => onCommentDelete(comment.id)}>Delete</Button>
-                {!isAuthorized && (
-                  <Typography variant="body2" color="red">
-                    User must be authorized
-                  </Typography>
-                )}
-              </ListItem>
+              <CommentComponent
+                comment={comment}
+                isAuthorized={isAuthorized}
+                onCommentDelete={onCommentDelete}
+                id={comment.id}
+              ></CommentComponent>
             ))
           : null}
       </List>

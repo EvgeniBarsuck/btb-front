@@ -1,12 +1,12 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { Formik } from "formik";
 
-import { customValidate } from "../../helpers/validate";
-import { useSubmit } from "./hooks/UseSubmit";
+import { UseCreateBlogForm } from "./hooks/UseSubmit";
 
 import "./CreateBlog.css";
 
 export const CreateBlog = () => {
+  const { customValidate, submitForm } = UseCreateBlogForm();
   return (
     <div>
       <Formik
@@ -16,7 +16,9 @@ export const CreateBlog = () => {
           name: "",
         }}
         validate={customValidate}
-        onSubmit={useSubmit}
+        onSubmit={(values, { setSubmitting }) =>
+          submitForm(values, setSubmitting)
+        }
       >
         {({
           values,

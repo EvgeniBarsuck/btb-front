@@ -1,28 +1,23 @@
 import Cookies from "universal-cookie";
 
-import { createPost } from "../../../api/create-post";
+import { register } from "../../../api/register";
 
-export const UseCreatePostSubmitForm = () => {
+export const UseRegisterSubmitForm = (navigate) => {
   async function submitForm<T extends { [key: string]: string }>(
     values: T,
-    setSubmitting
+    setSubmitting,
   ) {
     setSubmitting(true);
 
-    const cookie = new Cookies();
-  
-    await createPost(
-      {
-        content: values.content,
-        blogId: values.blog,
-        name: values.name,
-        shortDescription: values.shortDescription,
-      },
-      cookie.get("accessToken")
-    );
-  
+    const cookies = new Cookies();
+
+    const result = await register(values.email, values.password);
+
+    cookies.set("accessToken", result.accessToken);
+
     setSubmitting(false);
-  
+
+    navigate("/admin");
   }
 
   function customValidate<T extends { [key: string]: string }>(
@@ -34,6 +29,10 @@ export const UseCreatePostSubmitForm = () => {
       if (!field) {
         errors.field = "Required";
       }
+    }
+
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(errors.email)) {
+      errors.email = "Invalid email address";
     }
 
     return errors;

@@ -5,6 +5,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BlogsPage } from "./pages/blogs/Blogs";
 import { AdminPage } from "./pages/admin/AdminPage";
+import { RegisterPage } from "./pages/register/register";
 
 import "./App.css";
 
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/blogs" element={<BlogsPage />} />
         <Route
           path="/admin"

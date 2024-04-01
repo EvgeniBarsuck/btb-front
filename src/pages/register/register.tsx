@@ -2,13 +2,13 @@ import { Formik } from "formik";
 import { Button, Link, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import { UseLoginSubmitForm } from "./hooks/UseSubmit";
+import { UseRegisterSubmitForm } from "./hooks/UseSubmit";
 
-import "./login.css";
+import "./register.css";
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   const navigate = useNavigate();
-  const { customValidate, submitForm } = UseLoginSubmitForm(navigate);
+  const { customValidate, submitForm } = UseRegisterSubmitForm(navigate);
 
   return (
     <div>
@@ -62,7 +62,7 @@ export const LoginPage = () => {
               Login
             </Button>
             <div className="regirect-section">
-              <p>Don't have account</p> <Link href="/register">Register</Link>
+              <p>Have account? </p> <Link href="/login">login</Link>
             </div>
           </form>
         )}
