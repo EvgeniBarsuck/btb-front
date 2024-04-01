@@ -12,7 +12,7 @@ export async function updateBlog(props: Props): Promise<{ id: string }> {
     const response = await axios.post(`http://localhost:3000/blogs/${props.blogId}`, props);
 
     return response.data;
-  } catch (e: any) {
-    throw new Error(e);
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

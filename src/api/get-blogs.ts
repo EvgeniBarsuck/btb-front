@@ -10,7 +10,11 @@ export interface Blog {
 }
 
 export async function getBlogs(): Promise<Blog[]> {
-  const response = await fetch("http://localhost:3000/blogs");
-
-  return response.json();
+  try {
+    const response = await fetch("http://localhost:3000/blogs");
+  
+    return response.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
 }

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Blog, getBlog } from "../../api/get-blog";
 import { Typography } from "@mui/material";
+
+import { Blog, getBlog } from "../../api/get-blog";
 import { PostsList } from "../PostsList/PostsList";
 
 import './BlogDetails.css';
@@ -25,7 +26,7 @@ export const BlogDetails = () => {
       <Typography variant="body1" gutterBottom>
         {blog?.props.longDescription}
       </Typography>
-      { blog && blog?.props.posts.length > 0 ? <PostsList posts={blog?.props.posts}></PostsList>: null} 
+      { blog?.props?.posts?.length && <PostsList posts={blog?.props.posts}></PostsList>} 
     </div>
   );
 };

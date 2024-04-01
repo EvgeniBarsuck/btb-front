@@ -13,7 +13,7 @@ export async function addComment(props: Props, accessToken: string): Promise<{ i
     });
 
     return response.data;
-  } catch (e: any) {
-    throw new Error(e);
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

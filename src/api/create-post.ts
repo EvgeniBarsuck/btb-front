@@ -16,7 +16,7 @@ export async function createPost(props: Props, accessToken: string): Promise<{ i
     });
 
     return response.data;
-  } catch (e: any) {
-    throw new Error(e);
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

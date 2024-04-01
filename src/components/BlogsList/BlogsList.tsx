@@ -4,9 +4,10 @@ import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-import { getBlogs, Blog } from "../../api/get-blogs";
 import { Button } from "@mui/material";
 import { useMutation, useQueryClient } from "react-query";
+
+import { getBlogs, Blog } from "../../api/get-blogs";
 
 import "./BlogsList.css";
 
@@ -16,7 +17,6 @@ export default function BlogsList() {
 
   React.useEffect(() => {
     getBlogs().then((data) => {
-      console.log(data);
       setBlogs(data);
     });
   }, []);

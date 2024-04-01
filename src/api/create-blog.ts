@@ -18,7 +18,7 @@ export async function createBlog(
     });
 
     return response.data;
-  } catch (e: any) {
-    throw new Error(e);
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

@@ -12,11 +12,15 @@ export interface Blog {
 }
 
 export async function getUserBlogs(accessToken: string): Promise<Blog[]> {
-  const response = await axios.get("http://localhost:3000/blogs/user", {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  return response.data;
+  try {
+    const response = await axios.get("http://localhost:3000/blogs/user", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error);
+  }
 }

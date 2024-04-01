@@ -1,47 +1,29 @@
-import { login as loginRequest } from "../../api/login";
-import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
-import "./login.css";
 import { Button, Link, TextField } from "@mui/material";
-import Cookies from "universal-cookie";
+
+import { customValidate } from "../../helpers/validate";
+import { useSubmit } from "./hooks/UseSubmit";
+
+import "./login.css";
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
 
   return (
     <div>
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={(values) => {
-          const errors: { email?: string, password?: string } = {};
+          const validateResult = customValidate(values);
 
-          if (!values.email) {
-            errors.email = "Required";
-          } else if (
+          if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
           ) {
-            errors.email = "Invalid email address";
+            validateResult.email = "Invalid email address";
           }
 
-          if (!values.password) {
-            errors.password = "Required";
-          }
-
-          return errors;
+          return validateResult;
         }}
-        onSubmit={async(values, { setSubmitting }) => {
-          setSubmitting(true);
-
-          const cookies = new Cookies();
-
-          const result = await loginRequest(values.email, values.password);
-
-          cookies.set('accessToken', result.accessToken);
-
-          setSubmitting(false);
-
-          navigate('/admin');
-        }}
+        onSubmit={useSubmit}
       >
         {({
           values,

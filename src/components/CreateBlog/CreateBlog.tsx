@@ -1,7 +1,9 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { Formik } from "formik";
-import Cookies from "universal-cookie";
-import { createBlog } from "../../api/create-blog";
+
+import { customValidate } from "../../helpers/validate";
+import { useSubmit } from "./hooks/UseSubmit";
+
 import "./CreateBlog.css";
 
 export const CreateBlog = () => {
@@ -13,39 +15,8 @@ export const CreateBlog = () => {
           longDescription: "",
           name: "",
         }}
-        validate={(values) => {
-          const errors: { name?: string, longDescription?: string, shortDescription?: string } = {};
-
-          if (!values.name) {
-            errors.name = "Required";
-          }
-
-          if (!values.longDescription) {
-            errors.longDescription = "Required";
-          }
-
-          if (!values.shortDescription) {
-            errors.longDescription = "Required";
-          }
-
-          return errors;
-        }}
-        onSubmit={async (values, { setSubmitting }) => {
-          setSubmitting(true);
-
-          const cookie = new Cookies();
-
-          await createBlog(
-            {
-              longDescription: values.longDescription,
-              name: values.name,
-              shortDescription: values.shortDescription,
-            },
-            cookie.get("accessToken")
-          );
-
-          setSubmitting(false);
-        }}
+        validate={customValidate}
+        onSubmit={useSubmit}
       >
         {({
           values,

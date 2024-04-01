@@ -6,17 +6,15 @@ import {
   Divider,
   TextField,
   Button,
-  List,
-  ListItem,
-  ListItemText,
 } from "@mui/material";
+import Cookies from "universal-cookie";
+
 import "./PostLists.css";
 import { PostInRelation } from "../../api/get-post";
 import { useEffect, useState } from "react";
 import { getComments, Comment } from "../../api/get-comments";
-import Cookies from "universal-cookie";
 import { addComment } from "../../api/add-comment";
-import { deleteComment } from "../../api/delete-comment";
+import { CommentsList } from "../CommentsList/CommentsList";
 
 export const PostsList = ({ posts }: { posts: PostInRelation[] }) => {
   const [comments, SetComments] = useState([] as Comment[]);
@@ -47,28 +45,13 @@ export const PostsList = ({ posts }: { posts: PostInRelation[] }) => {
     await addComment(
       {
         message: newComment,
-        postId: post
+        postId: post,
       },
       token
     );
   }
 
-  async function onCommentDelete(id: string) {
-    const token = cookie.get("accessToken");
-
-    if (!token) {
-      SetIsAuthorized(false);
-
-      return;
-    }
-
-    SetIsAuthorized(true);
-
-    await deleteComment({ id, }, token);
-  }
-
   useEffect(() => {
-    console.log("🚀 ~ useEffect ~ post:", post);
     if (post) {
       getComments(post).then((data) => {
         console.log(data);
@@ -99,21 +82,7 @@ export const PostsList = ({ posts }: { posts: PostInRelation[] }) => {
               <Typography variant="body1">{post.content}</Typography>
             </AccordionDetails>
             <div className="message-section">
-              <Typography variant="overline">Comments</Typography>
-              <List>
-                {comments.length > 0
-                  ? comments.map((comment) => (
-                      <ListItem sx={{
-                        width: '500px',
-                        justifyContent: 'flex-end'
-                      }}>
-                        <input hidden value={comment.id}></input>
-                        <ListItemText primary={comment.props.message} />
-                        <Button onClick={() => onCommentDelete(comment.id)}>Delete</Button>
-                      </ListItem>
-                    ))
-                  : null}
-              </List>
+              <CommentsList comments={comments}></CommentsList>
             </div>
 
             <Divider variant="fullWidth" component="div" />
@@ -128,11 +97,11 @@ export const PostsList = ({ posts }: { posts: PostInRelation[] }) => {
                 <Button variant="text" onClick={onCommentSend}>
                   Send
                 </Button>
-                {!isAuthorized ? (
+                {!isAuthorized && (
                   <Typography variant="body2" color="red">
                     User must be authorized
                   </Typography>
-                ) : null}
+                )}
               </div>
             </div>
           </Accordion>

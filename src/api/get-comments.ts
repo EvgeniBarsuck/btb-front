@@ -8,7 +8,11 @@ export interface Comment {
 }
 
 export async function getComments(postId: string): Promise<Comment[]> {
-  const response = await fetch(`http://localhost:3000/comments/${postId}`);
-
-  return response.json();
+  try {
+    const response = await fetch(`http://localhost:3000/comments/${postId}`);
+  
+    return response.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
 }

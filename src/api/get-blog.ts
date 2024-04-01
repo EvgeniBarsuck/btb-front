@@ -13,7 +13,11 @@ export interface Blog {
 }
 
 export async function getBlog(id: string): Promise<Blog> {
-  const response = await fetch(`http://localhost:3000/blogs/${id}`);
-
-  return response.json();
+  try {
+    const response = await fetch(`http://localhost:3000/blogs/${id}`);
+  
+    return response.json();
+  } catch (error: any) {
+    throw new Error(error);
+  }
 }

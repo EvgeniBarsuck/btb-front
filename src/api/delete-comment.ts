@@ -13,7 +13,7 @@ export async function deleteComment(props: Props, accessToken: string): Promise<
     });
 
     return response.data;
-  } catch (e: any) {
-    throw new Error(e);
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

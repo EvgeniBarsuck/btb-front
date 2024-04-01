@@ -9,9 +9,10 @@ import {
 } from "@mui/material";
 import "./CreatePost.css";
 import { Formik } from "formik";
+
 import { Blog } from "../../api/get-user-blogs";
-import { createPost } from "../../api/create-post";
-import Cookies from "universal-cookie";
+import { customValidate } from "../../helpers/validate";
+import { useSubmit } from "./hooks/UseSubmit";
 
 export const CreatePost = (props: { userBlogs: Blog[] }) => {
   return (
@@ -23,44 +24,8 @@ export const CreatePost = (props: { userBlogs: Blog[] }) => {
           name: "",
           blog: null,
         }}
-        validate={(values) => {
-          const errors: {
-            name?: string;
-            content?: string;
-            shortDescription?: string;
-          } = {};
-
-          if (!values.name) {
-            errors.name = "Required";
-          }
-
-          if (!values.content) {
-            errors.content = "Required";
-          }
-
-          if (!values.shortDescription) {
-            errors.shortDescription = "Required";
-          }
-
-          return errors;
-        }}
-        onSubmit={async (values, { setSubmitting }) => {
-          setSubmitting(true);
-
-          const cookie = new Cookies();
-
-          await createPost(
-            {
-              content: values.content,
-              blogId: values.blog,
-              name: values.name,
-              shortDescription: values.shortDescription,
-            },
-            cookie.get("accessToken")
-          );
-
-          setSubmitting(false);
-        }}
+        validate={customValidate}
+        onSubmit={useSubmit}
       >
         {({
           values,
