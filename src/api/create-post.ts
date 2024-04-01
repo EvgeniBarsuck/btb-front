@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface Props {
   name: string;
@@ -7,7 +7,10 @@ interface Props {
   blogId: string;
 }
 
-export async function createPost(props: Props, accessToken: string): Promise<{ id: string }> {
+export async function createPost(
+  props: Props,
+  accessToken: string,
+): Promise<{ id: string }> {
   try {
     const response = await axios.post(`http://localhost:3000/post`, props, {
       headers: {

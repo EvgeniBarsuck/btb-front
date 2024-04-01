@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface Props {
   name: string;
@@ -8,7 +8,7 @@ interface Props {
 
 export async function createBlog(
   props: Props,
-  accessToken: string
+  accessToken: string,
 ): Promise<{ id: string }> {
   try {
     const response = await axios.post(`http://localhost:3000/blog`, props, {

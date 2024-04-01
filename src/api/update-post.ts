@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface Props {
   name: string;
@@ -12,7 +12,7 @@ export async function updatePost(props: Props): Promise<{ id: string }> {
   try {
     const response = await axios.post(
       `http://localhost:3000/posts/${props.blogId}`,
-      props
+      props,
     );
 
     return response.data;

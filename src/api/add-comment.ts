@@ -1,10 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface Props {
-    message: string;
+  message: string;
 }
 
-export async function addComment(props: Props, accessToken: string): Promise<{ id: string }> {
+export async function addComment(
+  props: Props,
+  accessToken: string,
+): Promise<{ id: string }> {
   try {
     const response = await axios.post(`http://localhost:3000/comments`, props, {
       headers: {

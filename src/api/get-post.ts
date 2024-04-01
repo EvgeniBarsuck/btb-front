@@ -30,7 +30,7 @@ export interface CommentInRelation {
 export async function getPost(postId: string) {
   try {
     const response = await fetch(`http://localhost:3000/posts${postId}`);
-  
+
     return response.json();
   } catch (error: any) {
     throw new Error(error);

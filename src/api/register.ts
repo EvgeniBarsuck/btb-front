@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export async function register(
   email: string,
-  password: string
+  password: string,
 ): Promise<{ accessToken: string }> {
   try {
     const response = await axios.post(`http://localhost:3000/users/register`, {
