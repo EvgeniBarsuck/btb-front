@@ -1,0 +1,8 @@
+.admin-page-create {
+    display: flex;
+    flex-direction: row;
+}
+
+.admin-page-create div {
+    margin: 10px;
+}

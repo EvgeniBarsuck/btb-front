@@ -1,0 +1,21 @@
+.regirect-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.regirect-section p {
+    padding-right: 10px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px outset black;
+}

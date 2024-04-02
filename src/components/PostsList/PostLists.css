@@ -1,0 +1,36 @@
+.post-list-content {
+}
+
+.post-list-item {
+    min-width: 500px;
+    display: flex;
+    align-items: start; 
+    flex-direction: column;
+    justify-content: start;   
+}
+
+.message-section {
+    padding: 10px;
+    display: flex;
+    align-items: start; 
+    flex-direction: column;
+}
+
+.message-section div {
+    display: flex;
+    align-items: start; 
+    flex-direction: column;
+    width: 100%;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;   
+    align-items: end; 
+
+    width: 100%;
+
+}
+
+

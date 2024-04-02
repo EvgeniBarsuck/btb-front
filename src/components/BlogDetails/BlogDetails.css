@@ -1,0 +1,9 @@
+.blog-content {
+    min-width: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-left: 50px;
+}
